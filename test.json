@@ -1,7 +1,8 @@
 {
   "variables": {
     "aws_access_key": "",
-    "aws_secret_key": ""
+    "aws_secret_key": "",
+	"build_number": ""
   },
   "builders": [{
     "type": "amazon-ebs",
@@ -11,6 +12,6 @@
     "source_ami": "ami-a10897d6",
     "instance_type": "t2.micro",
     "ssh_username": "ec2-user",
-    "ami_name": "packer-example {{timestamp}}"
+    "ami_name": "test-{{user `build_number`}}"
   }]
 }

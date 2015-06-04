@@ -14,7 +14,7 @@
     "region": "eu-west-1",
     "source_ami": "ami-47a23a30",
     "instance_type": "t2.micro",
-    "ssh_username": "ec2-user",
+    "ssh_username": "ubuntu",
     "ami_name": "{{user `build_number`}}"
   }],
   "provisioners": [{

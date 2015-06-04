@@ -2,10 +2,7 @@
   "variables": {
     "aws_access_key": "",
     "aws_secret_key": "",
-	"build_number": "",
-	"INSTANCE_USER": "admin",
-	"NVM_VERSION": "v0.25.4",
-	"NODE_VERSION": "0.12"
+	"build_number": ""
   },
   "builders": [{
     "type": "amazon-ebs",
@@ -16,14 +13,5 @@
     "instance_type": "t2.micro",
     "ssh_username": "ec2-user",
     "ami_name": "{{user `build_number`}}"
-  }],
-  "provisioners": [{
-  "type": "shell",
-  "environment_vars": [
-    "INSTANCE_USER={{user `INSTANCE_USER`}}",
-    "NVM_VERSION={{user `NVM_VERSION`}}",
-    "NODE_VERSION={{user `NODE_VERSION`}}"
-  ],
-  "script": "./packer-nginx.sh"
-}]
+  }]
 }

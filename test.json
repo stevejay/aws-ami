@@ -12,7 +12,7 @@
     "access_key": "{{user `aws_access_key`}}",
     "secret_key": "{{user `aws_secret_key`}}",
     "region": "eu-west-1",
-    "source_ami": "ami-22de994a",
+    "source_ami": "ami-47a23a30",
     "instance_type": "t2.micro",
     "ssh_username": "ec2-user",
     "ami_name": "{{user `build_number`}}"

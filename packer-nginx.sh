@@ -55,8 +55,10 @@ echo "packer: precaching server dependencies"
 echo "packer: installing nginx at system startup"
 sudo update-rc.d nginx defaults
 
+echo "updating nginx config files"
+sudo mv -f /tmp/nginx.conf /etc/nginx/
+sudo mv -f /tmp/walkdesigner.com /etc/nginx/sites-available
+sudo ln -s /etc/nginx/sites-available/walkdesigner.com /etc/nginx/sites-enabled/walkdesigner.com
 
-
-
-
+echo "restarting nginx"
 sudo service nginx reload

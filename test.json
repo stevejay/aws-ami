@@ -17,7 +17,18 @@
     "ssh_username": "ubuntu",
     "ami_name": "{{user `build_number`}}"
   }],
-  "provisioners": [{
+  "provisioners": [
+  {
+  "type": "file",
+  "source": "nginx/walkdesigner-prod/nginx.conf",
+  "destination": "/tmp/nginx.conf"
+},
+{
+  "type": "file",
+  "source": "nginx/walkdesigner-prod/sites-available/walkdesigner.com",
+  "destination": "/tmp/walkdesigner.com"
+},
+{
   "type": "shell",
   "environment_vars": [
     "INSTANCE_USER={{user `INSTANCE_USER`}}",

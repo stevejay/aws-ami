@@ -14,7 +14,7 @@ server {
 
 server {
 	listen 80 default_server;
-	listen [::]:80 default_server ipv6only=on;
+	listen [::]:80 ipv6only=on;
 
 	root /usr/share/nginx/html;
 	index index.html;

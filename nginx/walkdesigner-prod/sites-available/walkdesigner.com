@@ -1,3 +1,4 @@
+
 #
 # Redirect all non-www to www
 #
@@ -14,16 +15,16 @@ server {
 
 server {
 	listen 80 default_server;
-	listen [::]:80 ipv6only=on;
+	listen [::]:80 default_server ipv6only=on;
 
 	root /usr/share/nginx/html;
-	index index.html;
+	#index index.html;
 
 	server_name www.walkdesigner.com;
 
 	location / {
 		# First attempt to serve request as file, then fall back to displaying a 404.
-		try_files $uri =404;
+		try_files $uri $uri/index.html =404;
 		# Uncomment to enable naxsi on this location
 		# include /etc/nginx/naxsi.rules
 	}

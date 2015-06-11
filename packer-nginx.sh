@@ -1,16 +1,18 @@
 #!/bin/bash
 
-echo "packer: updating apt"
-sudo apt-key update
-sudo apt-get update
-sudo apt-get remove apt-listchanges
-sudo apt-get install git make g++ graphicsmagick curl -y
+exit 0
+
+echo "packer: adding packages"
+#sudo apt-key update
+#sudo apt-get update
+#sudo apt-get remove apt-listchanges
+sudo yum install -y git make gcc-c++ GraphicsMagick curl
 
 echo "packer: nginx"
 sudo mkdir -p /var/log/nginx
 sudo chown $INSTANCE_USER /var/log/nginx
 sudo chmod -R 755 /var/log/nginx
-sudo apt-get install nginx -y
+sudo yum install -y nginx
 
 echo "packer: nvm"
 curl https://raw.githubusercontent.com/creationix/nvm/$NVM_VERSION/install.sh | bash

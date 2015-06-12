@@ -3,16 +3,19 @@
 exit 0
 
 echo "packer: adding packages"
+sudo yum update -y
 #sudo apt-key update
 #sudo apt-get update
 #sudo apt-get remove apt-listchanges
-sudo yum install -y git make gcc-c++ GraphicsMagick curl
+sudo yum install -y git gcc-c++ GraphicsMagick
 
 echo "packer: nginx"
 sudo mkdir -p /var/log/nginx
-sudo chown $INSTANCE_USER /var/log/nginx
-sudo chmod -R 755 /var/log/nginx
+#sudo chown $INSTANCE_USER /var/log/nginx
+#sudo chmod -R 755 /var/log/nginx
 sudo yum install -y nginx
+sudo chown nginx /var/log/nginx
+sudo chmod -R 755 /var/log/nginx
 
 echo "packer: nvm"
 curl https://raw.githubusercontent.com/creationix/nvm/$NVM_VERSION/install.sh | bash
@@ -55,14 +58,23 @@ echo "packer: precaching server dependencies"
 #npm install --prefix ~/app/precache --production
 
 echo "packer: installing nginx at system startup"
-sudo update-rc.d nginx defaults
+#sudo update-rc.d nginx defaults
+sudo chkconfig --add nginx
+sudo chkconfig nginx on
 
 echo "updating nginx config files"
-sudo rm /etc/nginx/sites-enabled/default
+#sudo mkdir -p /data/www/web-public
+#aws s3 cp s3://www.walkdesigner.com/builds/web-public.15.zip /tmp/ --region eu-west-1
+#sudo unzip /tmp/web-public.15.zip -d /data/www/web-public
+
+sudo mkdir /etc/nginx/sites-available
+sudo mkdir /etc/nginx/sites-enabled
+
+#sudo rm /etc/nginx/sites-enabled/default
 sudo mv -f /tmp/nginx.conf /etc/nginx/
 sudo mv -f /tmp/walkdesigner.com /etc/nginx/sites-available
 sudo ln -s /etc/nginx/sites-available/walkdesigner.com /etc/nginx/sites-enabled/walkdesigner.com
 
 echo "restarting nginx"
-sudo service nginx restart 
+sudo service nginx restart
 # reload

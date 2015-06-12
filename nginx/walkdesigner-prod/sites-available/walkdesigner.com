@@ -17,10 +17,10 @@ server {
 	listen 80 default_server;
 	listen [::]:80 default_server ipv6only=on;
 
-	root /usr/share/nginx/html;
+	root /data/www/web-public;
 	#index index.html;
 
-	server_name www.walkdesigner.com;
+	server_name www.walkdesigner.com www-green.walkdesigner.com;
 
 	location / {
 		# First attempt to serve request as file, then fall back to displaying a 404.

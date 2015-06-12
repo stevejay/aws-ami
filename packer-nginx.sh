@@ -1,7 +1,5 @@
 #!/bin/bash
 
-exit 0
-
 echo "packer: adding packages"
 sudo yum update -y
 #sudo apt-key update

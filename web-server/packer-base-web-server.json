@@ -1,0 +1,36 @@
+{
+  "variables": {
+    "aws_access_key": "",
+    "aws_secret_key": "",
+	"build_number": "",
+	"node_version": ""
+  },
+  "builders": [{
+    "type": "amazon-ebs",
+    "access_key": "{{user `aws_access_key`}}",
+    "secret_key": "{{user `aws_secret_key`}}",
+    "region": "eu-west-1",
+    "source_ami": "ami-a10897d6",
+    "instance_type": "t2.micro",
+    "ssh_username": "ec2-user",
+    "ami_name": "{{user `build_number`}}"
+  }],
+  "provisioners": [
+  {
+    "type": "file",
+    "source": "nginx/nginx.conf",
+    "destination": "/home/ec2-user/nginx.conf"
+  },
+  {
+    "type": "file",
+    "source": "initd/web-api-initd",
+    "destination": "/home/ec2-user/web-api-initd"
+  },
+  {
+    "type": "shell",
+    "environment_vars": [
+      "NODE_VERSION={{user `node_version`}}"
+    ],
+    "script": "./packer-base-web-server.sh"
+  }]
+}

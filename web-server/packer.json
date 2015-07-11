@@ -18,12 +18,12 @@
   "provisioners": [
   {
     "type": "file",
-    "source": "nginx/nginx.conf",
+    "source": "files/nginx.conf",
     "destination": "/home/ec2-user/nginx.conf"
   },
   {
     "type": "file",
-    "source": "initd/web-api-initd",
+    "source": "files/web-api-initd",
     "destination": "/home/ec2-user/web-api-initd"
   },
   {
@@ -31,6 +31,6 @@
     "environment_vars": [
       "NODE_VERSION={{user `node_version`}}"
     ],
-    "script": "./packer-base-web-server.sh"
+    "script": "./packer.sh"
   }]
 }

@@ -25,13 +25,12 @@ sudo ln -s /usr/local/lib/node /usr/lib/node
 sudo ln -s /usr/local/bin/npm /usr/bin/npm
 sudo ln -s /usr/local/bin/node-waf /usr/bin/node-waf
 
-echo "packer: nginx"
+echo "packer: installing nginx"
 
 sudo mkdir -p /var/log/nginx
-#sudo chown $INSTANCE_USER /var/log/nginx
-#sudo chmod -R 755 /var/log/nginx
 sudo yum install -y nginx
 sudo chown nginx /var/log/nginx
+#sudo chown $INSTANCE_USER /var/log/nginx
 sudo chmod -R 755 /var/log/nginx
 
 echo "packer: tweaking tcp"
@@ -39,17 +38,12 @@ echo "packer: tweaking tcp"
 sudo sysctl -w net.ipv4.tcp_slow_start_after_idle=0
 sudo sysctl -w net.ipv4.tcp_window_scaling=1
 
-echo "packer: installing nginx at system startup"
-
-sudo chkconfig --add nginx
-sudo chkconfig nginx on
-
 echo "packer: preparing node on startup"
 
 cp /home/ec2-user/web-api-initd /etc/init.d/
 chmod +x /etc/init.d/web-api-initd
 
-echo "packer: preparing nginx"
+echo "packer: basic nginx config"
 
 sudo mkdir /etc/nginx/sites-available
 sudo mkdir /etc/nginx/sites-enabled

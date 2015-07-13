@@ -40,11 +40,12 @@ sudo sysctl -w net.ipv4.tcp_window_scaling=1
 
 echo "packer: preparing node on startup"
 
-cp /home/ec2-user/web-api-initd /etc/init.d/
-chmod +x /etc/init.d/web-api-initd
+sudo cp /home/ec2-user/web-api-initd /etc/init.d/
+sudo chmod +x /etc/init.d/web-api-initd
 
 echo "packer: basic nginx config"
 
 sudo mkdir /etc/nginx/sites-available
 sudo mkdir /etc/nginx/sites-enabled
 sudo mv -f /home/ec2-user/nginx.conf /etc/nginx/
+sudo mkdir -p /data/www

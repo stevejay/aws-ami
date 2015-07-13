@@ -113,6 +113,7 @@ except:
 		try:
 			client.delete_auto_scaling_group(AutoScalingGroupName=auto_scaling_group_name, ForceDelete=True)
 		except:
-
+			logging.error('Failed to roll back creation of auto scaling group')
+		
 	logging.error('Failed to deploy to blue', exc_info=False)
 	exit(1)

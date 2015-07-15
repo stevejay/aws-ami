@@ -15,6 +15,7 @@ parser.add_argument('--instancetype', dest="instance_type", required=True, help=
 parser.add_argument('--iaminstanceprofile', dest="iam_instance_profile", required=True, help='The IAM instance profile')
 parser.add_argument('--maxinstances', dest="max_instances", required=True, help='Maximum number of instance in the auto scaling group')
 parser.add_argument('--normalinstancecount', dest="normal_instance_count", required=True, help='The desired normal number of instance in the auto scaling group')
+parser.add_argument('--subnetid', dest="subnet_id", required=True, help='The VPC zone identifier for the auto scaling group')
 
 client = boto3.client('autoscaling')
 created_launch_configuration = False
@@ -73,9 +74,9 @@ try:
 		LaunchConfigurationName=results.launch_config_name,
 		#InstanceId='string',
 		MinSize=1,
-		MaxSize=results.max_instances,
-		DesiredCapacity=results.normal_instance_count,
-		DefaultCooldown=300,
+		MaxSize=int(results.max_instances),
+		DesiredCapacity=int(results.normal_instance_count),
+		DefaultCooldown=450,
 		#AvailabilityZones=[
 		#	'string',
 		#],
@@ -83,9 +84,9 @@ try:
 			'walkdesigner-lb-1',
 		],
 		#HealthCheckType='string',
-		HealthCheckGracePeriod=300,
+		HealthCheckGracePeriod=450,
 		#PlacementGroup='string',
-		VPCZoneIdentifier=results.security_group, # ??????????????
+		VPCZoneIdentifier=results.subnet_id, # ??????????????
 		TerminationPolicies=[
 			'Default',
 		],
@@ -115,5 +116,5 @@ except:
 		except:
 			logging.error('Failed to roll back creation of auto scaling group')
 		
-	logging.error('Failed to deploy to blue', exc_info=False)
+	logging.error('Failed to deploy to blue', exc_info=True)
 	exit(1)

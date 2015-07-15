@@ -16,21 +16,33 @@
     "ami_name": "{{user `ami_name`}}"
   }],
   "provisioners": [
-  {
-    "type": "file",
-    "source": "files/nginx.conf",
-    "destination": "/home/ec2-user/nginx.conf"
-  },
-  {
-    "type": "file",
-    "source": "files/web-api-initd",
-    "destination": "/home/ec2-user/web-api-initd"
-  },
-  {
-    "type": "shell",
-    "environment_vars": [
-      "NODE_VERSION={{user `node_version`}}"
-    ],
-    "script": "./packer.sh"
-  }]
+	  {
+		"type": "file",
+		"source": "files/nginx.conf",
+		"destination": "/home/ec2-user/nginx.conf"
+	  },
+	  {
+		"type": "file",
+		"source": "files/web-api-initd",
+		"destination": "/home/ec2-user/web-api-initd"
+	  },
+	  {
+		"type": "shell",
+		"environment_vars": [ "NODE_VERSION={{user `node_version`}}" ],
+		"script": "./packer.sh"
+	  },
+	  {
+		"type": "shell",
+		"inline": ["mkdir /tmp/tests"]
+	  },
+	  {
+		"type": "file",
+		"source": "files/serverspec/",
+		"destination": "/tmp/tests"
+	  },
+	  {
+		"type": "shell",
+		"script": "./serverspec.sh"
+	  }
+  ]
 }

@@ -33,12 +33,12 @@
 	  },
 	  {
 		"type": "shell",
-		"inline": ["mkdir /tmp/tests"]
+		"inline": ["mkdir /tmp/base-tests"]
 	  },
 	  {
 		"type": "file",
 		"source": "files/serverspec/",
-		"destination": "/tmp/tests"
+		"destination": "/tmp/base-tests"
 	  },
 	  {
 		"type": "shell",

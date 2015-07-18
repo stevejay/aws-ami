@@ -3,7 +3,8 @@
 echo "packer: adding packages"
 
 sudo yum update -y
-sudo yum install -y gcc-c++ make
+sudo yum install -y gcc-c++
+sudo yum install -y make
 sudo yum install -y openssl-devel
 sudo yum install -y GraphicsMagick
 sudo yum install -y git
@@ -21,9 +22,9 @@ cd ~
 echo "packer: creating global dir links for node"
 
 sudo ln -s /usr/local/bin/node /usr/bin/node
-sudo ln -s /usr/local/lib/node /usr/lib/node
+#sudo ln -s /usr/local/lib/node /usr/lib/node
 sudo ln -s /usr/local/bin/npm /usr/bin/npm
-sudo ln -s /usr/local/bin/node-waf /usr/bin/node-waf
+#sudo ln -s /usr/local/bin/node-waf /usr/bin/node-waf
 
 echo "packer: installing nginx"
 
